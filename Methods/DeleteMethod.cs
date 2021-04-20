@@ -6,9 +6,16 @@ namespace QueryNet.Methods
 {
     public class DeleteMethod<T> : IQueryMethod<T> where T : DbModel, new()
     {
+        private T model;
+
+        public DeleteMethod(T model)
+        {
+            this.model = model;
+        }
+
         public void AppendToQuery(ref T model, StringBuilder builder, IDbCommand command)
         {
-            model = new T();
+            model = this.model ?? new T();
             AddMethod(model, builder);
         }
 

@@ -20,10 +20,29 @@ namespace QueryNet
 
         public Task<TResultType> Where(Func<T, Condition[]> conditionGetter)
         {
+            if (conditionGetter == null)
+            {
+                throw new ArgumentNullException("conditionGetter", "conditionGetter cannot be null");
+            }
+
             queryBuilder.SetCondition(new WhereCondition<T>(conditionGetter));
             var result = new TResult();
             result.SetQuery(queryBuilder);
             return result.GetResult();
+        }
+
+        public Task<TResultType> Where(Func<T, DbFieldValue> singleKeyGetter)
+        {
+            if (singleKeyGetter == null)
+            {
+                throw new ArgumentNullException("singleKeyGetter", "singleKeyGetter cannot be null");
+            }
+
+            return Where(x =>
+            {
+                var key = singleKeyGetter(x);
+                return new[] { Condition.Equals(key, key.Get()) };
+            });
         }
     }
 }

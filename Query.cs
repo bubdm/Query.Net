@@ -57,6 +57,10 @@ namespace QueryNet
             return new QueryConditionSelector<T, ModelResult<T>, List<T>>(builder);
         }
 
+        /// <summary>
+        /// Updates changed model values within the database
+        /// </summary>
+        /// <returns>The number of rows affected</returns>
         public static QueryConditionSelector<T, OperationResult<T>, int> Update<T>(T model) where T : DbModel, new()
         {
             var builder = new QueryBuilder<T>();
@@ -64,20 +68,20 @@ namespace QueryNet
             return new QueryConditionSelector<T, OperationResult<T>, int>(builder);
         }
 
-        public static Task<int> Insert<T>(T model) where T : DbModel, new()
+        public static async Task<bool> Insert<T>(T model) where T : DbModel, new()
         {
             var builder = new QueryBuilder<T>();
             builder.SetMethod(new InsertMethod<T>(model));
 
             var result = new OperationResult<T>();
             result.SetQuery(builder);
-            return result.GetResult();
+            return await result.GetResult() > 0;
         }
 
-        public static QueryConditionSelector<T, OperationResult<T>, int> Delete<T>() where T : DbModel, new()
+        public static QueryConditionSelector<T, OperationResult<T>, int> Delete<T>(T model = null) where T : DbModel, new()
         {
             var builder = new QueryBuilder<T>();
-            builder.SetMethod(new DeleteMethod<T>());
+            builder.SetMethod(new DeleteMethod<T>(model));
             return new QueryConditionSelector<T, OperationResult<T>, int>(builder);
         }
     }
