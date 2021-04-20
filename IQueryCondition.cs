@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Query.Net.Queries
+namespace QueryNet
 {
     internal interface IQueryCondition<T> : IQueryPart<T> where T : DbModel
     {

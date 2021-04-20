@@ -2,7 +2,7 @@
 using System.Data;
 using System.Text;
 
-namespace Query.Net.Queries.Methods
+namespace QueryNet.Methods
 {
     internal class SelectMethod<T> : IQueryMethod<T> where T : DbModel, new()
     {

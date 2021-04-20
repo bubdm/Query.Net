@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace Query.Net
+namespace QueryNet
 {
     public abstract class DbModel
     {

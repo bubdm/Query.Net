@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Query.Net.Queries.Conditions
+namespace QueryNet.Conditions
 {
     public class Condition
     {

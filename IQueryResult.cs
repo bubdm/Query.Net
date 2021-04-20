@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Query.Net.Queries
+namespace QueryNet
 {
     public interface IQueryResult<T, TResult> where T : DbModel, new()
     {

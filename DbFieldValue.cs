@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Query.Net
+namespace QueryNet
 {
     public class DbFieldValue<T> : DbFieldValue
     {

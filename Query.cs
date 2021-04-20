@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
-using Query.Net.Queries.Methods;
-using Query.Net.Queries.Results;
+using QueryNet.Methods;
+using QueryNet.Results;
 
-namespace Query.Net.Queries
+namespace QueryNet
 {
     public static class Query
     {

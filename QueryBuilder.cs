@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Common;
 using System.Text;
 
-namespace Query.Net.Queries
+namespace QueryNet
 {
     public class QueryBuilder<T> where T : DbModel, new()
     {

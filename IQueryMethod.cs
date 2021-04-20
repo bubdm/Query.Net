@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Query.Net.Queries
+namespace QueryNet
 {
     internal interface IQueryMethod<T> : IQueryPart<T> where T : DbModel
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading.Tasks;
 
-namespace Query.Net.Queries.Results
+namespace QueryNet.Results
 {
     public class ModelResult<T> : IQueryResult<T, List<T>> where T : DbModel, new()
     {

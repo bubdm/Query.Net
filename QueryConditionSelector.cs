@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Query.Net.Queries.Conditions;
+using QueryNet.Conditions;
 
-namespace Query.Net.Queries
+namespace QueryNet
 {
     public class QueryConditionSelector<T, TResult, TResultType>
         where T : DbModel, new()

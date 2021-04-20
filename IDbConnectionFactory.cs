@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using System.Threading.Tasks;
 
-namespace Query.Net.Queries
+namespace QueryNet
 {
     public interface IDbConnectionFactory
     {

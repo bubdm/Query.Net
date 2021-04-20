@@ -2,7 +2,7 @@
 using System.Data;
 using System.Text;
 
-namespace Query.Net.Queries.Conditions
+namespace QueryNet.Conditions
 {
     internal class WhereCondition<T> : IQueryCondition<T> where T : DbModel
     {

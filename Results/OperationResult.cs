@@ -2,7 +2,7 @@
 using System.Data.Common;
 using System.Threading.Tasks;
 
-namespace Query.Net.Queries.Results
+namespace QueryNet.Results
 {
     public class OperationResult<T> : IQueryResult<T, int> where T : DbModel, new()
     {
