@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
 using QueryNet.Methods;
+using QueryNet.Procedure;
 using QueryNet.Results;
 
 namespace QueryNet
@@ -38,6 +39,7 @@ namespace QueryNet
         /// </summary>
         internal static void ReturnConnection(DbConnection connection)
         {
+            if (connection == null) return;
             connections.Enqueue(connection);
         }
 
@@ -83,6 +85,40 @@ namespace QueryNet
             var builder = new QueryBuilder<T>();
             builder.SetMethod(new DeleteMethod<T>(model));
             return new QueryConditionSelector<T, OperationResult<T>, int>(builder);
+        }
+
+        public static async Task<TResult> Procedure<TResult, TModel>(TModel model) where TModel : DbModel, IStoredProcedure<TResult>
+        {
+            var connection = await GetConnection();
+
+            try
+            {
+                var command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = model.procedureName;
+
+                foreach (var field in model.GetAllFields())
+                {
+                    var parameter = command.CreateParameter();
+                    parameter.ParameterName = $"?{field.GetFieldName()}";
+                    parameter.Value = field.Get();
+                    command.Parameters.Add(parameter);
+                }
+
+                var returnParamter = command.CreateParameter();
+                returnParamter.ParameterName = $"?{model.returnName}";
+                returnParamter.DbType = model.returnType;
+                returnParamter.Direction = ParameterDirection.Output;
+                command.Parameters.Add(returnParamter);
+
+                await command.ExecuteNonQueryAsync();
+
+                return (TResult)command.Parameters[$"?{model.returnName}"].Value;
+            }
+            finally
+            {
+                ReturnConnection(connection);
+            }
         }
     }
 }
