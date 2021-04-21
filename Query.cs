@@ -87,7 +87,7 @@ namespace QueryNet
             return new QueryConditionSelector<T, OperationResult<T>, int>(builder);
         }
 
-        public static async Task<TResult> Procedure<TResult, TModel>(TModel model) where TModel : DbModel, IStoredProcedure<TResult>
+        public static async Task<TResult> Procedure<TResult, TModel>(TModel model) where TModel : PrModel<TResult>
         {
             var connection = await GetConnection();
 

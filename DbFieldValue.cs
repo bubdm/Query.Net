@@ -78,7 +78,7 @@ namespace QueryNet
         /// Returns if the current value is updated from the db value
         /// </summary>
         /// <returns></returns>
-        internal bool IsUpdated()
+        public bool IsUpdated()
         {
             return !localValue.Equals(dbValue);
         }

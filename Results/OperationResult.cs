@@ -21,7 +21,15 @@ namespace QueryNet.Results
             try
             {
                 var command = queryBuilder.Build(connection, ref model);
-                return await command.ExecuteNonQueryAsync();
+                var result = await command.ExecuteNonQueryAsync();
+                if (result > 0 && model != null)
+                {
+                    foreach (var field in model.GetAllFields())
+                    {
+                        field.Save();
+                    }
+                }
+                return result;
             }
             finally
             {
