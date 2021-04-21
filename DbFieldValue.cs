@@ -7,6 +7,12 @@ namespace QueryNet
         {
         }
 
+        public T value
+        {
+            get => Get();
+            set => Set(value);
+        }
+
         public new T Get()
         {
             return (T)base.Get();
