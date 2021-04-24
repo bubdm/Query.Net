@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QueryNet.Conditions
 {
-    internal class WhereCondition<T> : IQueryCondition<T> where T : DbModel
+    internal class WhereCondition<T> : IQueryCondition<T> where T : DbModel, new()
     {
         /// <summary>
         /// The function to specify which fields to check
@@ -31,7 +31,10 @@ namespace QueryNet.Conditions
         /// <param name="command"></param>
         private void AddFields(ref T model, StringBuilder builder, IDbCommand command)
         {
-            var conditions = conditionsGetter.Invoke(model);
+            var tempModel = new T();
+            model.CloneFieldsInto(tempModel);
+
+            var conditions = conditionsGetter.Invoke(tempModel);
             if (conditions == null || conditions.Length == 0)
             {
                 throw new NullReferenceException("Fields returned from the fieldGetter cannot be null or empty.");
