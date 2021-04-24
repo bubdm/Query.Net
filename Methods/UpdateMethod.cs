@@ -55,7 +55,7 @@ namespace QueryNet.Methods
 
                 var parameter = command.CreateParameter();
                 parameter.ParameterName = $"?{fieldName}";
-                parameter.Value = field.Get();
+                parameter.Value = field.GetForDb();
                 command.Parameters.Add(parameter);
             }
         }

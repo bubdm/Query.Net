@@ -81,11 +81,30 @@ namespace QueryNet
         }
 
         /// <summary>
+        /// Gets the value as a db value
+        /// </summary>
+        /// <returns></returns>
+        internal object GetForDb()
+        {
+            if (localValue == null)
+            {
+                return DBNull.Value;
+            }
+
+            return Get();
+        }
+
+        /// <summary>
         /// Returns if the current value is updated from the db value
         /// </summary>
         /// <returns></returns>
         public bool IsUpdated()
         {
+            if (localValue == null)
+            {
+                return dbValue != null;
+            }
+
             return !localValue.Equals(dbValue);
         }
     }
