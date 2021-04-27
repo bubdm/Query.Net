@@ -100,7 +100,7 @@ namespace QueryNet
                 foreach (var field in model.GetAllFields())
                 {
                     var parameter = command.CreateParameter();
-                    parameter.ParameterName = $"?{field.GetFieldName()}";
+                    parameter.ParameterName = $"{field.GetFieldName()}";
                     parameter.Value = field.Get();
                     command.Parameters.Add(parameter);
                 }
