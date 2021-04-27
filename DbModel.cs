@@ -57,6 +57,32 @@ namespace QueryNet
             return (DbFieldValue<T>)field;
         }
 
+        protected DbListFieldValue<T> GetListField<T>(Func<string, T> deserializer, Func<T, string> serializer, [CallerMemberName] string propertyName = null)
+        {
+            if (propertyName == null)
+            {
+                throw new ArgumentException("PropertyName argument cannot be null");
+            }
+
+            if (deserializer == null)
+            {
+                throw new ArgumentException("Deserializer argument cannot be null");
+            }
+
+            if (serializer == null)
+            {
+                throw new ArgumentException("Serializer argument cannot be null");
+            }
+
+            if (!fieldValues.TryGetValue(propertyName, out var field))
+            {
+                field = new DbListFieldValue<T>(propertyName, deserializer, serializer);
+                fieldValues.Add(propertyName, field);
+            }
+
+            return (DbListFieldValue<T>)field;
+        }
+
         /// <summary>
         /// Initializes all property fields
         /// </summary>
