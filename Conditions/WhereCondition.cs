@@ -18,7 +18,7 @@ namespace QueryNet.Conditions
 
         public void AppendToQuery(ref T model, StringBuilder builder, IDbCommand command)
         {
-            builder.Append(" WHERE ");
+            builder.Append(" WHERE");
 
             AddFields(ref model, builder, command);
         }
