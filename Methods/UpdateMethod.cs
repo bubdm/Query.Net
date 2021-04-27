@@ -8,6 +8,8 @@ namespace QueryNet.Methods
     {
         private T model;
 
+        private bool updated = false;
+
         public UpdateMethod(T model)
         {
             this.model = model;
@@ -18,6 +20,11 @@ namespace QueryNet.Methods
             model = this.model;
             AddMethod(builder);
             AddFields(ref model, builder, command);
+        }
+
+        public bool CanExecute()
+        {
+            return updated;
         }
 
         /// <summary>
@@ -43,6 +50,7 @@ namespace QueryNet.Methods
             foreach (var field in model.GetAllFields())
             {
                 if (!field.IsUpdated()) continue; // ignore non updated fields
+                updated = true;
                 if (!first)
                 {
                     builder.Append(", ");

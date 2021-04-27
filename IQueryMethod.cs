@@ -5,6 +5,6 @@ namespace QueryNet
 {
     internal interface IQueryMethod<T> : IQueryPart<T> where T : DbModel
     {
-
+        bool CanExecute();
     }
 }

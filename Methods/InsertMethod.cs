@@ -21,6 +21,11 @@ namespace QueryNet.Methods
             AddValues(ref model, builder, command);
         }
 
+        public bool CanExecute()
+        {
+            return true;
+        }
+
         private void AddMethod(ref T model, StringBuilder builder)
         {
             builder.Append("INSERT INTO ");

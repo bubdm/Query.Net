@@ -19,6 +19,11 @@ namespace QueryNet.Methods
             AddMethod(model, builder);
         }
 
+        public bool CanExecute()
+        {
+            return true;
+        }
+
         private void AddMethod(T model, StringBuilder builder)
         {
             builder.Append("DELETE FROM ");

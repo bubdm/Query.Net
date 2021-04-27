@@ -32,12 +32,13 @@ namespace QueryNet
             this.condition = condition;
         }
 
-        internal DbCommand Build(DbConnection connection, ref T model)
+        internal DbCommand Build(DbConnection connection, ref T model, out bool canExecute)
         {
             var textBuilder = new StringBuilder();
             var command = connection.CreateCommand();
 
             method.AppendToQuery(ref model, textBuilder, command);
+            canExecute = method.CanExecute();
             condition?.AppendToQuery(ref model, textBuilder, command);
 
             command.CommandText = textBuilder.ToString();

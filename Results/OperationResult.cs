@@ -20,7 +20,12 @@ namespace QueryNet.Results
 
             try
             {
-                var command = queryBuilder.Build(connection, ref model);
+                var command = queryBuilder.Build(connection, ref model, out var canExecute);
+                if (!canExecute)
+                {
+                    return -1;
+                }
+
                 var result = await command.ExecuteNonQueryAsync();
                 if (result > 0 && model != null)
                 {

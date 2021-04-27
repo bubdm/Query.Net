@@ -22,7 +22,12 @@ namespace QueryNet.Results
 
             try
             {
-                var command = queryBuilder.Build(connection, ref model);
+                var command = queryBuilder.Build(connection, ref model, out var canExecute);
+                if (!canExecute)
+                {
+                    return null;
+                }
+
                 using (var r = await command.ExecuteReaderAsync())
                 {
                     if (!r.HasRows)

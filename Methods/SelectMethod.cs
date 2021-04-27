@@ -20,6 +20,11 @@ namespace QueryNet.Methods
             AddFrom(model, builder);
         }
 
+        public bool CanExecute()
+        {
+            return true;
+        }
+
         /// <summary>
         /// Adds the select method to the command text
         /// </summary>
