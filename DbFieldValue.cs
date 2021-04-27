@@ -19,12 +19,12 @@ namespace QueryNet
             set => Set(value ? 1 : 0);
         }
 
-        public new T Get()
+        internal new T Get()
         {
             return (T)base.Get();
         }
 
-        public void Set(T value)
+        internal void Set(T value)
         {
             base.Set(value);
         }
@@ -65,7 +65,7 @@ namespace QueryNet
         /// Gets the local value of this field
         /// </summary>
         /// <returns></returns>
-        public object Get()
+        internal object Get()
         {
             return localValue;
         }
@@ -73,7 +73,7 @@ namespace QueryNet
         /// <summary>
         /// Sets the local value of this field
         /// </summary>
-        public void Set(object value)
+        internal void Set(object value)
         {
             localValue = value;
         }
@@ -104,7 +104,7 @@ namespace QueryNet
         /// Returns if the current value is updated from the db value
         /// </summary>
         /// <returns></returns>
-        public bool IsUpdated()
+        internal bool IsUpdated()
         {
             if (localValue == null)
             {
