@@ -13,6 +13,12 @@ namespace QueryNet
             set => Set(value);
         }
 
+        public bool boolValue
+        {
+            get => Convert.ToInt32(Get()) > 0;
+            set => Set(value ? 1 : 0);
+        }
+
         public new T Get()
         {
             return (T)base.Get();
