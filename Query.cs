@@ -70,7 +70,7 @@ namespace QueryNet
             return new QueryConditionSelector<T, OperationResult<T>, int>(builder);
         }
 
-        public static async Task<bool> Insert<T>(T model) where T : DbModel, new()
+        public static async Task<bool> Insert<T>(params T[] model) where T : DbModel, new()
         {
             var builder = new QueryBuilder<T>();
             builder.SetMethod(new InsertMethod<T>(model));
