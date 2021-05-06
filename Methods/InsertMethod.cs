@@ -91,11 +91,12 @@ namespace QueryNet.Methods
                         builder.Append(", ");
                     }
                     first = false;
-                    builder.Append('?');
-                    builder.Append(field.GetFieldName());
+
+                    var paramName = $"?{field.GetFieldName()}{modelIndex}";
+                    builder.Append(paramName);
 
                     var parameter = command.CreateParameter();
-                    parameter.ParameterName = $"?{field.GetFieldName()}{modelIndex}";
+                    parameter.ParameterName = paramName;
                     parameter.Value = field.GetForDb();
                     command.Parameters.Add(parameter);
                 }
